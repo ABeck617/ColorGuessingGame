@@ -1,0 +1,32 @@
+/* In your CSS file, give the body a background color of rgb(35, 35, 35).  
+You will also need to change your h1 text color to white. */
+
+
+body {
+    background-color: rgb(35, 35, 35);
+}
+
+/* 
+Now, if you add margin: auto to the container class, your grid of squares should move to the center (the auto does this).  
+Meanwhile, text-align: center will do the same for your h1.   */
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.box {
+    background-color: purple;
+    margin: 1.66%;
+    width: 30%;
+    padding-top: 30%;
+    
+}
+/* 
+Make the container class a flexbox container.   */
+/* Give it a max-width of 600 pixels.  (This is a maximum width, so our page remains responsive). */
+
+.container {
+    display: flex;
+    max-width: 600px;
+    margin: auto;
+}
