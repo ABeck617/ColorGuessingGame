@@ -5,14 +5,7 @@
     //     but this is a good place to start).  Here are the values: 
     
     
-    var listOfColors = [
-    "rgb(255, 0, 0)",
-    "rgb(255, 255, 0)",
-    "rgb(0, 255, 0)",
-    "rgb(0, 255, 255)",
-    "rgb(0, 0, 255)",
-    "rgb(255, 0, 255)"
-];
+     var listOfColors = generateRandomColors(6);
 
     // Now select all 6 colored divs from the HTML page (using a DOM selector starting with document...) 
     // and store them in a variable called squares or something similar.
@@ -21,8 +14,25 @@
 
     //  Loop through all six squares on your HTML page and assign the six colors in your array, to those squares.
     //  Hint: this will look something like this: squares[index].style.backgroundColor = colors[index])
-     let secretColor = listOfColors[3];
+     let secretColor = secretColors();
      let colorDisplay = document.getElementById("colorDisplay");
+     var messageDisplay = document.querySelector("#message");
+     var h1 = document.querySelector("h1");
+     var resetButton = document.querySelector("#reset");
+
+     resetButton.addEventListener("click", function() {
+         // generate random colors
+         colors = generateRandomColors(6);
+         // try to pick a new random color from the array
+         let secretColor = secretColors();
+         // change colorDisplay
+         colorDisplay.textContent = secretColor;
+         // try to change the colors of squares
+         for(var i = 0; i < squares.length; i++) {
+             squares[i].style.backgroundColor = colors[i];
+         }
+         h1.style.backgroundColor = "#232323";
+     })
 
      colorDisplay.textContent = secretColor;
 
@@ -40,9 +50,54 @@
         squares[i].addEventListener("click", function(){
             var clickedColor = this.style.backgroundColor;
             if (clickedColor === secretColor) {
-                document.getElementById("newColors") = "Correct!";
+                messageDisplay.textContent = "Correct!";
+                changeColors(clickedColor);
+                h1.style.backgroundColor = clickedColor;
             } else {
                 this.style.backgroundColor = "rgb(35, 35, 35)";
+                messageDisplay.textContent = "Try Again";
             }
             });
         }
+
+
+        function changeColors(color) {
+            //loop through squares
+            for(var i = 0; i < squares.length; i++){
+                squares[i].style.backgroundColor = color;
+            }
+        }
+
+        // Write another function to select a random color from our array.  
+        // To do this, first we need to pick a random number, then we need to use that number to select one of the array values.  
+        // To pick a random number, you can use the Math.random() method -- 
+        // this function randomly picks a number between 0 and 1.  But... it never includes the number 1 (try it out in the Console).  
+        // AND our array has six colors in it -- how would you use this method to pick a random number between 1 and 6?
+
+        function secretColors() {
+            //pick random number
+           var random = Math.floor(Math.random() * listOfColors.length);
+           return listOfColors[random];
+        }
+
+        function generateRandomColors(num) {
+            var arr = [];
+
+            for(var i = 0; i < num; i++) {
+                arr.push(randomColor())
+            }
+            
+            return arr
+        }
+
+        function randomColor(){
+            //Pick a "red" from 0 to 255
+            var r = Math.floor(Math.random() * 256);
+            //Pick a "green" from 0 to 255
+            var g = Math.floor(Math.random() * 256);
+            //Pick a "blue" from 0 to 255
+            var b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+
+        

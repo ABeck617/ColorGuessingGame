@@ -30,3 +30,11 @@ Make the container class a flexbox container.   */
     max-width: 600px;
     margin: auto;
 }
+
+
+
+#stripe{
+    background: white;
+    height: 30px;
+    text-align: center;
+}
